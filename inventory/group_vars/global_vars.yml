@@ -1,0 +1,5 @@
+rabbit_vhost: sensu
+rabbit_user: sensu
+rabbit_pass: sensu
+uchiwa_dashboard_user: user
+uchiwa_dashboard_user_password: user

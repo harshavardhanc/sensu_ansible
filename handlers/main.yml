@@ -1,0 +1,31 @@
+---
+# Handlers file
+
+- name: restart redis service
+  service: 
+    name: redis-server
+    state: restarted
+
+
+- name: restart rabbitmq service
+  service: 
+    name: rabbitmq
+    state: restarted
+
+
+- name: restart sensu-server
+  service: 
+    name: sensu-server
+    state: restarted
+
+
+- name: restart sensu-client
+  service:
+    name: sensu-client
+    state: restarted
+
+
+- name: restart sensu-api
+  service:
+    name: sensu-api
+    state: restarted

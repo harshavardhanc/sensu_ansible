@@ -1,0 +1,40 @@
+---
+
+#- hosts: remote
+#  tasks:
+#    - include: roles/sensu/tasks/sensu.yml
+#    - include: roles/redis/tasks/redis.yml
+#    - include: roles/rabbitmq/tasks/rabbitmq.yml
+#    - include: roles/uchiwa/tasks/uchiwa.yml
+
+
+- name: ----------------------------- Starting Sensu Installation --------------------------------- 
+  hosts: remote
+  roles:
+    - { role: sensu, tags: 'sensu-role' }
+    - { role: redis, tags: 'redis-role' }
+    - { role: rabbitmq, tags: 'rabbitmq-role' }
+    - { role: uchiwa, tags: 'uchiwa-role' }
+
+
+
+#- name: ----------------------------- Starting Sensu Installation --------------------------------- 
+#  hosts: sensu
+#  roles:
+#    - { role: sensu, tags: 'sensu-role' }
+
+#- name: Step 2
+#  hosts: redis
+#  roles:
+#    - { role: redis, tags: 'redis-role' }
+
+#- name: step 3
+#  hosts: rabbitmq
+#  roles:
+#    - { role: rabbitmq, tags: 'rabbitmq-role' }
+ 
+#- name: step 4
+#  hosts: sensu
+#  roles:
+#    - { role: uchiwa, tags: 'uchiwa-role' }
+#

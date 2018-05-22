@@ -1,0 +1,5 @@
+[remote]
+13.127.76.240 ansible_python_interpreter=/usr/bin/python3 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/harsha/Documents/pem-files/newkey.pem
+
+[global_vars:children]
+remote

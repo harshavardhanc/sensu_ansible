@@ -1,0 +1,24 @@
+---
+# Installing redis 
+
+
+- name: Updating cache and Installing redis
+  become: yes
+  apt:
+   name: redis-server
+   update_cache: yes
+   state: present
+  
+
+- name: Copying configuration files
+  become: yes
+  template:
+    src: templates/redis.json.j2
+    dest: /etc/sensu/conf.d/redis.json
+    mode: 644
+    owner: root
+
+
+- name: Restart redis-server
+  apt: 
+  notify: restart redis service 
