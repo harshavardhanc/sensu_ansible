@@ -1,0 +1,74 @@
+--- 
+
+# Installing Sensu Server, client and api
+
+- name: Updating repository
+  become: yes
+  apt:
+    update_cache: yes
+
+
+- name: Adding GPG public key
+  become: yes
+  apt_key: 
+    url: https://sensu.global.ssl.fastly.net/apt/pubkey.gpg
+    state: present
+
+
+- name: Adding Sensu repo to apt source
+  become: yes
+  apt_repository:
+    repo: deb https://sensu.global.ssl.fastly.net/apt {{ ansible_distribution_release }} main
+
+
+- name: Update repo and Install Sensu
+  become: yes
+  apt: 
+    name: sensu
+    update_cache: yes
+    state: present
+
+
+- name: Copy configuration files to remote machine
+  become: yes
+  copy: 
+    src: "{{ item }}"
+    dest: /etc/sensu/conf.d/
+    mode: 644
+    owner: root
+  with_fileglob: files/*
+
+
+- name: Copying Jinja2 template
+  become: yes
+  template:
+    src: templates/api.json.j2
+    dest: /etc/sensu/conf.d/api.json
+    mode: 644
+    owner: root
+
+
+- name: Copying configuration file to remote machine
+  become: yes
+  template: 
+    src: templates/redis.json.j2
+    dest: /etc/sensu/conf.d/redis.json
+    mode: 644
+    owner: root
+
+
+- name: Copying configuration file to remote machine
+  become: yes
+  template: 
+    src: templates/rabbitmq.json.j2
+    dest: /etc/sensu/conf.d/rabbitmq.json
+    mode: 644
+    owner: root
+
+
+- name: Restart Sensu-server
+  become: yes
+  service: 
+    name: sensu-server
+    state: restarted
+

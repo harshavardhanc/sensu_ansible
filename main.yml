@@ -1,0 +1,35 @@
+---
+#- name: ----------------------------- Starting Sensu Installation --------------------------------- 
+#  hosts: remote
+#  roles:
+#    - { role: sensu, tags: 'sensu-role' }
+#    - { role: redis, tags: 'redis-role' }
+#    - { role: rabbitmq, tags: 'rabbitmq-role' }
+#    - { role: uchiwa, tags: 'uchiwa-role' }
+
+
+
+- name: Starting Sensu Installation
+  hosts: sensu
+  roles:
+    - { role: sensu-server, tags: 'sensu-server-role' }
+
+- name: Redis
+  hosts: redis
+  roles:
+    - { role: redis, tags: 'redis-role' }
+
+- name: Rabbitmq
+  hosts: rabbitmq
+  roles:
+    - { role: rabbitmq, tags: 'rabbitmq-role' }
+ 
+- name: Uchiwa
+  hosts: sensu
+  roles:
+    - { role: uchiwa, tags: 'uchiwa-role' }
+
+- name: Sensu-Client
+  hosts: sensu-client
+  roles:
+    - { role: sensu-client, tags: 'sensu-client-role'}

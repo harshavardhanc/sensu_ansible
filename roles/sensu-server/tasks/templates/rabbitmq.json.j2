@@ -1,0 +1,9 @@
+{
+  "rabbitmq": {
+  "host": "{{groups['rabbitmq'][0]}}",
+  "port": 5672,
+  "vhost": "/{{rabbit_vhost}}",
+  "user": "{{rabbit_user}}",
+  "password": "{{rabbit_pass}}"
+   }
+}

@@ -1,0 +1,33 @@
+--- 
+# Installing Uchiwa dashboard
+
+- name: Install Uchiwa dashoard
+  become: yes
+  apt: 
+    name: uchiwa
+    update_cache: yes
+    state: present
+
+
+- name: Copying configuration file to remote machine
+  become: yes
+  template:
+    src: templates/uchiwa.json
+    dest: /etc/sensu/
+    mode: 644 
+    owner: root
+
+- name: Start Uchiwa
+  become: yes
+  shell: '/etc/init.d/uchiwa start'
+
+
+- name: Restart Sensu Services
+  become: yes
+  service: 
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - 'sensu-server'
+    - 'sensu-client'
+    - 'sensu-api'

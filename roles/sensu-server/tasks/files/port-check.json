@@ -1,0 +1,11 @@
+{
+  "checks": {
+    "port-status": {
+      "command": "check-ports.rb -h 0.0.0.0 -p 22 -t 20",
+      "subscribers": [
+        "debian"
+      ],
+      "interval": 60
+   }
+ }
+}
