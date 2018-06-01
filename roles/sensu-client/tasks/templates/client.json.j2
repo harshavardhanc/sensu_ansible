@@ -1,0 +1,10 @@
+{
+"client": {
+  "name": "{{ansible_hostname}}",
+  "address": "{{groups['sensu-client'][0]}}",
+  "environment": "{{environment_name}}",
+  "subscriptions": [
+    "debian"
+  ]
+ }
+}

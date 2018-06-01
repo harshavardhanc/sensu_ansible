@@ -1,0 +1,11 @@
+{
+  "checks": {
+    "memory-status": {
+      "command": "check-memory.rb -w 500 -c 700",
+      "subscribers": [
+        "debian"
+      ],
+      "interval": 60
+   }
+ }
+}

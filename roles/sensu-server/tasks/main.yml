@@ -1,4 +1,4 @@
----
+--- 
 
 # Installing Sensu Server, client and api
 
@@ -46,4 +46,29 @@
     dest: /etc/sensu/conf.d/api.json
     mode: 644
     owner: root
+
+
+- name: Copying configuration file to remote machine
+  become: yes
+  template: 
+    src: templates/redis.json.j2
+    dest: /etc/sensu/conf.d/redis.json
+    mode: 644
+    owner: root
+
+
+- name: Copying configuration file to remote machine
+  become: yes
+  template: 
+    src: templates/rabbitmq.json.j2
+    dest: /etc/sensu/conf.d/rabbitmq.json
+    mode: 644
+    owner: root
+
+
+- name: Restart Sensu-server
+  become: yes
+  service: 
+    name: sensu-server
+    state: restarted
 

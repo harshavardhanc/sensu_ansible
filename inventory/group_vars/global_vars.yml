@@ -1,5 +1,13 @@
+# Rabbitmq_vars
+
 rabbit_vhost: sensu
 rabbit_user: sensu
-rabbit_pass: sensu
-uchiwa_dashboard_user: user
-uchiwa_dashboard_user_password: user
+rabbit_pass: secret
+
+# Uchiwa_vars
+uchiwa_dashboard_user: admin
+uchiwa_dashboard_user_password: admin
+
+
+# Environment_Name
+environment_name: test

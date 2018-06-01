@@ -1,6 +1,31 @@
 ---
 # Installing redis 
 
+- name: Updating repository
+  become: yes
+  apt:
+    update_cache: yes
+
+
+- name: Adding GPG public key
+  become: yes
+  apt_key: 
+    url: https://sensu.global.ssl.fastly.net/apt/pubkey.gpg
+    state: present
+
+
+- name: Adding Sensu repo to apt source
+  become: yes
+  apt_repository:
+    repo: deb https://sensu.global.ssl.fastly.net/apt {{ ansible_distribution_release }} main
+
+
+- name: Update repo and Install Sensu
+  become: yes
+  apt: 
+    name: sensu
+    update_cache: yes
+    state: present
 
 - name: Updating cache and Installing redis
   become: yes
@@ -8,17 +33,16 @@
    name: redis-server
    update_cache: yes
    state: present
-  
 
-- name: Copying configuration files
+
+- name: Updating redis configuration file
   become: yes
-  template:
-    src: templates/redis.json.j2
-    dest: /etc/sensu/conf.d/redis.json
-    mode: 644
-    owner: root
+  lineinfile:
+    path: /etc/redis/redis.conf
+    regexp: '^bind 127.0.0.1'
+    line: 'bind 0.0.0.0'
 
 
 - name: Restart redis-server
-  apt: 
-  notify: restart redis service 
+  become: yes
+  shell: '/etc/init.d/redis-server restart'

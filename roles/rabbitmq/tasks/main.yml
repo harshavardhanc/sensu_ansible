@@ -1,13 +1,41 @@
 ---
 # Installing rabbitmq
 
+
 - name: Updating repository
   become: yes
   apt:
     update_cache: yes
 
 
-- name: Add the Erlang Solutions APT repository
+- name: Adding GPG public key
+  become: yes
+  apt_key: 
+    url: https://sensu.global.ssl.fastly.net/apt/pubkey.gpg
+    state: present
+
+
+- name: Adding Sensu repo to apt source
+  become: yes
+  apt_repository:
+    repo: deb https://sensu.global.ssl.fastly.net/apt {{ ansible_distribution_release }} main
+
+
+- name: Update repo and Install Sensu
+  become: yes
+  apt: 
+    name: sensu
+    update_cache: yes
+    state: present
+
+
+- name: Updating repository
+  become: yes
+  apt:
+    update_cache: yes
+
+
+- name: Download Erlang packages to destination machine
   become: yes
   get_url:
     url: http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
@@ -80,15 +108,6 @@
         read_priv: .*
         write_priv: .*
     state: present
-    
-
-- name: Copying configuration file to remote machine
-  become: yes
-  template: 
-    src: templates/rabbitmq.json.j2
-    dest: /etc/sensu/conf.d/rabbitmq.json
-    mode: 644
-    owner: root
 
 
 - name: Restart rabbitmq service

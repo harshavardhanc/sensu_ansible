@@ -1,5 +1,19 @@
-[remote]
-13.127.76.240 ansible_python_interpreter=/usr/bin/python3 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/harsha/Documents/pem-files/newkey.pem
+[sensu]
+13.127.141.42 ansible_python_interpreter=/usr/bin/python3 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/harsha/Documents/pem-files/newkey.pem
+
+[redis]
+13.127.253.95 ansible_python_interpreter=/usr/bin/python3 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/harsha/Documents/pem-files/newkey.pem
+
+
+[rabbitmq]
+13.232.43.9 ansible_python_interpreter=/usr/bin/python3 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/harsha/Documents/pem-files/newkey.pem
+
+
+[sensu-client]
+13.126.11.169 ansible_python_interpreter=/usr/bin/python3 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/harsha/Documents/pem-files/newkey.pem
 
 [global_vars:children]
-remote
+sensu
+redis
+rabbitmq
+sensu-client

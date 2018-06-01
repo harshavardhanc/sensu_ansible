@@ -1,0 +1,83 @@
+---
+# Installing Sensu-client on remote client hosts
+
+
+- name: Updating repository
+  become: yes
+  apt:
+    update_cache: yes
+
+
+- name: Install the GPG public key
+  become: yes
+  apt_key:
+    url: https://sensu.global.ssl.fastly.net/apt/pubkey.gpg
+    state: present
+  
+
+- name: Adding Sensu repo to apt source
+  become: yes
+  apt_repository:
+    repo: deb https://sensu.global.ssl.fastly.net/apt {{ ansible_distribution_release }} main
+
+
+- name: Update repo and Install Sensu
+  become: yes
+  apt: 
+    name: sensu
+    update_cache: yes
+    state: present
+
+
+- name: Copying client conf template to remote machine
+  become: yes
+  template:
+    src: client.json.j2
+    dest: /etc/sensu/conf.d/client.json
+    mode: 644
+    owner: root
+
+
+- name: Copying rabbitmq template to remote machine
+  become: yes
+  template:
+    src: rabbitmq.json.j2
+    dest: /etc/sensu/conf.d/rabbitmq.json
+    mode: 644
+    owner: root
+    
+
+- name: Copy transport conf file remote machine
+  become: yes
+  copy:
+    src: files/transport.json
+    dest: /etc/sensu/conf.d/transport.json
+    mode: 644
+    owner: root
+
+
+- name: Install disk-check plugin
+  become: yes
+  shell: /opt/sensu/embedded/bin/gem install sensu-plugins-disk-checks
+
+
+- name: Install memory-check plugin
+  become: yes
+  shell: /opt/sensu/embedded/bin/gem install sensu-plugins-memory-checks
+
+
+- name: Install port-check plugin
+  become: yes
+  shell: /opt/sensu/embedded/bin/gem install sensu-plugins-network-checks
+
+- name: Install process-check plugin
+  become: yes
+  shell: /opt/sensu/embedded/bin/gem install sensu-plugins-process-checks
+
+
+- name: Restart Sensu-client
+  become: yes
+  service: 
+    name: sensu-client
+    state: restarted
+

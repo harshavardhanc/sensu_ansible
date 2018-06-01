@@ -1,0 +1,11 @@
+{
+  "checks": {
+    "process-status": {
+      "command": "check-process.rb -p ssh",
+      "subscribers": [
+        "debian"
+      ],
+      "interval": 60    
+    }
+  }
+}
