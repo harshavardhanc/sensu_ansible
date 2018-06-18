@@ -1,4 +1,4 @@
-Ansible playbook for setting up Sensu for Monitoring
+Ansible playbook for setting up Sensu for Monitoring:
 
 Sensu is an infrastructure and application monitoring and telemetry solution. Sensu provides a framework for monitoring infrastructure, service and application health
 
