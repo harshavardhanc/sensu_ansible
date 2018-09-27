@@ -10,14 +10,14 @@
 - name: Adding GPG public key
   become: yes
   apt_key: 
-    url: https://sensu.global.ssl.fastly.net/apt/pubkey.gpg
+    url: "{{ gpg_public_key_url }}"
     state: present
 
 
 - name: Adding Sensu repo to apt source
   become: yes
   apt_repository:
-    repo: deb https://sensu.global.ssl.fastly.net/apt {{ ansible_distribution_release }} main
+    repo: deb {{ repo_url }}/apt {{ ansible_distribution_release }} main
 
 
 - name: Update repo and Install Sensu

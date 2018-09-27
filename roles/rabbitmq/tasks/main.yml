@@ -1,24 +1,17 @@
 ---
 # Installing rabbitmq
 
-
-- name: Updating repository
-  become: yes
-  apt:
-    update_cache: yes
-
-
 - name: Adding GPG public key
   become: yes
   apt_key: 
-    url: https://sensu.global.ssl.fastly.net/apt/pubkey.gpg
+    url: "{{ gpg_public_key_url }}"
     state: present
 
 
 - name: Adding Sensu repo to apt source
   become: yes
   apt_repository:
-    repo: deb https://sensu.global.ssl.fastly.net/apt {{ ansible_distribution_release }} main
+    repo: deb "{{ repo_url }}"/apt {{ ansible_distribution_release }} main
 
 
 - name: Update repo and Install Sensu
@@ -29,22 +22,16 @@
     state: present
 
 
-- name: Updating repository
-  become: yes
-  apt:
-    update_cache: yes
-
-
 - name: Download Erlang packages to destination machine
   become: yes
   get_url:
-    url: http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
-    dest: /tmp/erlang-solutions_1.0_all.deb
+    url: "{{ erlang_url }}/{{ erlang_package_deb }}"
+    dest: "{{ path_of_erlang_deb }}/{{ erlang_package_deb }}"
 
 
 - name: Add the Erlang Solutions APT repository
   become: yes
-  apt: deb="/tmp/erlang-solutions_1.0_all.deb"
+  apt: deb= "{{ path_of_erlang_deb }}/{{ erlang_package_deb }}"
 
 
 - name: Updating repository and Install Erlang
@@ -62,18 +49,22 @@
 - name: Download rabbitmq package
   become: yes
   get_url:
-    url: http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.9/rabbitmq-server_3.6.9-1_all.deb
-    dest: /tmp/rabbitmq-server_3.6.9-1_all.deb
+    url: "{{ rabbitmq_url_deb }}/{{ rabbitmq_deb_package_name }}"
+    dest: "{{ path_of_rabbitmq_deb }}/{{ rabbitmq_deb_package_name }}"
 
 
 - name: Install rabbitmq
   become: true
-  apt: deb="/tmp/rabbitmq-server_3.6.9-1_all.deb"
+  apt: deb= "{{ path_of_rabbitmq_deb }}/{{ rabbitmq_deb_package_name }}"
 
 
 - name: Restart rabbitmq service
   apt: 
   notify: restart rabbitmq service
+
+
+- name: Wait for RabbitMQ to be up and running before asking to create a vhost
+  pause: seconds=3
 
 
 - name: Ensure RabbitMQ is running
@@ -82,10 +73,6 @@
     name: rabbitmq-server
     state: started
     enabled: true
-    
-
-- name: Wait for RabbitMQ to be up and running before asking to create a vhost
-  pause: seconds=3
 
 
 # Configuring Rabbitmq
@@ -93,7 +80,7 @@
 - name: Creating rabbitmq virtual host
   become: yes
   rabbitmq_vhost:
-    name: /{{rabbit_vhost}}
+    name: /"{{rabbit_vhost}}"
     state: present
 
 

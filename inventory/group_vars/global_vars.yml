@@ -1,5 +1,8 @@
 # Rabbitmq_vars
 
+rabbitmq_url_deb: http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.9
+rabbitmq_deb_package_name: rabbitmq-server_3.6.9-1_all.deb
+path_of_rabbitmq_deb: /tmp
 rabbit_vhost: sensu
 rabbit_user: sensu
 rabbit_pass: secret
@@ -7,6 +10,14 @@ rabbit_pass: secret
 # Uchiwa_vars
 uchiwa_dashboard_user: admin
 uchiwa_dashboard_user_password: admin
+
+
+# Sensu_vars
+gpg_public_key_url: https://sensu.global.ssl.fastly.net/apt/pubkey.gpg
+repo_url: https://sensu.global.ssl.fastly.net
+erlang_url: http://packages.erlang-solutions.com
+erlang_package_deb: erlang-solutions_1.0_all.deb
+path_of_erlang_deb: /tmp 
 
 
 # Environment_Name
