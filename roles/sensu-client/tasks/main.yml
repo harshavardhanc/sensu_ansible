@@ -2,12 +2,6 @@
 # Installing Sensu-client on remote client hosts
 
 
-- name: Updating repository
-  become: yes
-  apt:
-    update_cache: yes
-
-
 - name: Install the GPG public key
   become: yes
   apt_key:
@@ -75,9 +69,8 @@
   shell: /opt/sensu/embedded/bin/gem install sensu-plugins-process-checks
 
 
-- name: Restart Sensu-client
-  become: yes
-  service: 
-    name: sensu-client
-    state: restarted
+- name: restart sensu-client
+  apt:
+  notify: restart sensu-client
+
 

@@ -2,30 +2,35 @@
 # Handlers file
 
 - name: restart redis service
+  become: yes
   service: 
     name: redis-server
     state: restarted
 
 
 - name: restart rabbitmq service
+  become: yes
   service: 
     name: rabbitmq-server
     state: restarted
 
 
 - name: restart sensu-server
+  become: yes
   service: 
     name: sensu-server
     state: restarted
 
 
 - name: restart sensu-client
+  become: yes
   service:
     name: sensu-client
     state: restarted
 
 
 - name: restart sensu-api
+  become: yes
   service:
     name: sensu-api
     state: restarted

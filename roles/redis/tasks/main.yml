@@ -1,11 +1,6 @@
 ---
 # Installing redis 
 
-- name: Updating repository
-  become: yes
-  apt:
-    update_cache: yes
-
 
 - name: Adding GPG public key
   become: yes
@@ -44,5 +39,5 @@
 
 
 - name: Restart redis-server
-  become: yes
-  shell: '/etc/init.d/redis-server restart'
+  apt:
+  notify: restart redis service

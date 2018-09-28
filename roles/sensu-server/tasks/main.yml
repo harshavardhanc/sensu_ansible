@@ -2,12 +2,6 @@
 
 # Installing Sensu Server, client and api
 
-- name: Updating repository
-  become: yes
-  apt:
-    update_cache: yes
-
-
 - name: Adding GPG public key
   become: yes
   apt_key: 
@@ -66,9 +60,7 @@
     owner: root
 
 
-- name: Restart Sensu-server
-  become: yes
-  service: 
-    name: sensu-server
-    state: restarted
+- name: restart sensu-server
+  apt:
+  notify: restart sensu-server
 
