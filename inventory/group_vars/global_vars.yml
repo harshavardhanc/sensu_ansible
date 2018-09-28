@@ -1,7 +1,7 @@
 # Rabbitmq_vars
 
-rabbitmq_url_deb: http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.9
-rabbitmq_deb_package_name: rabbitmq-server_3.6.9-1_all.deb
+rabbitmq_url_deb: "http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.9"
+rabbitmq_deb_package_name: "rabbitmq-server_3.6.9-1_all.deb"
 path_of_rabbitmq_deb: /tmp
 rabbit_vhost: sensu
 rabbit_user: sensu
