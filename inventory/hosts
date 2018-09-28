@@ -1,5 +1,4 @@
 [sensu]
-<<<<<<< HEAD
 13.127.162.199 ansible_python_interpreter=/usr/bin/python3 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/harsha/Documents/pem-files/newkey.pem
 
 
@@ -15,23 +14,6 @@
 13.127.162.199 ansible_python_interpreter=/usr/bin/python3 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/harsha/Documents/pem-files/newkey.pem
 
 
-=======
-<ip_address> ansible_python_interpreter=/usr/bin/python3 ansible_ssh_user=<ssh_user> ansible_ssh_private_key_file=<path_to_pem_file>
- 
- 
-[redis]
-<ip_address> ansible_python_interpreter=/usr/bin/python3 ansible_ssh_user=<ssh_user> ansible_ssh_private_key_file=<path_to_pem_file>
- 
- 
-[rabbitmq]
-<ip_address> ansible_python_interpreter=/usr/bin/python3 ansible_ssh_user=<ssh_user> ansible_ssh_private_key_file=<path_to_pem_file>
- 
- 
-[sensu-client]
-<ip_address> ansible_python_interpreter=/usr/bin/python3 ansible_ssh_user=<ssh_user> ansible_ssh_private_key_file=<path_to_pem_file>
- 
- 
->>>>>>> e8b3306a98f81cfb7e6a0e16e1297ee1ea3ce51e
 [global_vars:children]
 sensu
 redis
