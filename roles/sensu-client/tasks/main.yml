@@ -70,7 +70,9 @@
 
 
 - name: restart sensu-client
-  apt:
-  notify: restart sensu-client
+  become: yes
+  service: 
+    name: sensu-client
+    state: restarted
 
 
