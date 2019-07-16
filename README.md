@@ -6,4 +6,5 @@
 - In github.csv there are 4 variables with comma seperated 
 
      REPO_NAME,BRANCH_NAME,MERGE_ACCESS_USERS(;),CHECKS
+     
      MERGE_ACCESS_USERS and CHECKS: Is required only by disableBranchProtection.sh script.
