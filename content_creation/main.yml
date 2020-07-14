@@ -1,6 +1,0 @@
----
-
-- name: portal dashboards
-  hosts: test
-  roles:
-   - creation 
