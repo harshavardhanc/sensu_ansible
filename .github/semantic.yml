@@ -5,8 +5,8 @@ titleOnly: true
 # See: https://github.com/commitizen/conventional-commit-types/blob/v3.0.0/index.json
 # You can override the valid types
 types:
-  - feat
-  - fix \#[0-9]
+  - feat [0-9]
+  - fix
   - docs
   - style
   - refactor
