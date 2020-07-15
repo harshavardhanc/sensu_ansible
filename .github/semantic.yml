@@ -6,7 +6,7 @@ titleOnly: true
 # You can override the valid types
 types:
   - feat
-  - fix
+  - fix \#[0-9]
   - docs
   - style
   - refactor
