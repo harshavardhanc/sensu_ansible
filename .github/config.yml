@@ -1,2 +1,2 @@
-PR_TITLE_REGEX: /?:[a-z][a-z0-9]+)\s*(#)[0-9]+(:)([a-zA-Z0-9]*\s*/i
+PR_TITLE_REGEX: \s*[a-z][a-z0-9]+\s*(#)[a-zA-Z0-9-]+\s*(:)\s*[a-zA-Z0-9 ]*\s*/i
 COMMIT_MESSAGE_REGEX: /([a-zA-Z0-9]+)/i
