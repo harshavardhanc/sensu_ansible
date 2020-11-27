@@ -1,5 +1,5 @@
 [sensu]
-
+52.172.202.151 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/harsha/.ssh/harsha.pem
 
 [redis]
 
